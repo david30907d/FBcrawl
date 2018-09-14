@@ -11,3 +11,17 @@
   → get該行中的me?fields=id,name 把me改成id (id同c2.py的id)
   → 在左側"搜尋欄位"選擇所需要的內容 
   → 按提交後即可看到結果
+
+```sql
+SELECT *
+FROM categorylinks
+WHERE cl_to NOT IN
+    (SELECT page_title
+     FROM page
+     WHERE page_namespace IN (0,
+                              14)
+       AND page_id IN
+         (SELECT pp_page
+          FROM page_props
+          WHERE pp_propname='hiddencat'))
+```
